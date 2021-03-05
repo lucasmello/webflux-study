@@ -3,7 +3,6 @@ package io.trajano.reactivespring.service;
 import io.trajano.reactivespring.api.converters.PromotionModelConverter;
 import io.trajano.reactivespring.application.business.PromotionRules;
 import io.trajano.reactivespring.application.ports.driver.PromotionPort;
-import io.trajano.reactivespring.domain.Employee;
 import io.trajano.reactivespring.domain.PromotionModel;
 import io.trajano.reactivespring.domain.PromotionResponseModel;
 import io.trajano.reactivespring.infrastructure.repository.EmployeeRepository;
@@ -35,6 +34,5 @@ public class PromotionService implements PromotionPort {
                 .flatMap(e -> promotionRules.updateEmployeeInfo(e, promotionModel))
                 .doOnNext(employeeRepository::save)
                 .flatMap(e -> promotionModelConverter.convert(e, promotionModel));
-
     }
 }

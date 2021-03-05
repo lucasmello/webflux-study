@@ -19,7 +19,8 @@ public class PromotionController {
     @PostMapping("/{employeeId}")
     public Mono<PromotionResponseModel> promote(@PathVariable String employeeId,
                                                 @RequestBody PromotionModel promotionModel) {
-        return promotionService.promote(employeeId, promotionModel);
+        return promotionService.promote(employeeId, promotionModel)
+                .switchIfEmpty(Mono.error(new RuntimeException()));
     }
 
 }
